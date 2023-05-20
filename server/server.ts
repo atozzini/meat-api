@@ -1,6 +1,7 @@
 import * as restify from 'restify'
-import { environment } from '../common/environment'
+import { enviroment } from '../common/enviroment'
 import { Router } from '../common/router'
+
 
 export class Server {
 
@@ -22,12 +23,13 @@ export class Server {
           router.applyRoutes(this.application)
         }
 
-        this.application.listen(environment.server.port, () => {
+        this.application.listen(enviroment.server.port, () => {
           resolve(this.application)
         })
 
+
       } catch (error) {
-        reject(error)
+
       }
     })
   }
@@ -35,5 +37,4 @@ export class Server {
   bootstrap(routers: Router[] = []): Promise<Server> {
     return this.initRoutes(routers).then(() => this)
   }
-
 }
